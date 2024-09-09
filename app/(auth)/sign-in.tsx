@@ -7,3 +7,5 @@ const SignIn = () => {
     </SafeAreaView>
   );
 };
+
+export default SignIn;

@@ -1,11 +1,11 @@
 import { SafeAreaView, Text } from "react-native";
 
-const SignUp = () => {
+const onborading = () => {
   return (
     <SafeAreaView>
-      <Text>Sign Up</Text>
+      <Text>welcome to uber clone</Text>
     </SafeAreaView>
   );
 };
 
-export default SignUp;
+export default onborading;
