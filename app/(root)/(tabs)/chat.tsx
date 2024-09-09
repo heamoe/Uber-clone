@@ -1,6 +1,6 @@
 import { SafeAreaView, Text } from "react-native";
 
-const chat = () => {
+const Chat = () => {
   return (
     <SafeAreaView>
       <Text>Welcome to chat</Text>

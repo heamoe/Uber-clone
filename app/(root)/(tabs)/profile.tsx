@@ -1,6 +1,6 @@
 import { SafeAreaView, Text } from "react-native";
 
-const profile = () => {
+const Profile = () => {
   return (
     <SafeAreaView>
       <Text>Welcome to profile</Text>

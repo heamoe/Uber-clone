@@ -1,6 +1,6 @@
 import { SafeAreaView, Text } from "react-native";
 
-const home = () => {
+const Home = () => {
   return (
     <SafeAreaView>
       <Text>Welcome to home</Text>
