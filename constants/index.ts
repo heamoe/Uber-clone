@@ -76,7 +76,7 @@ export const onboarding = [
     id: 1,
     title: "The perfect ride is just a tap away!",
     description:
-      "Your journey begins with Ryde. Find your ideal ride effortlessly.",
+      "Your journey begins with Ride. Find your ideal ride effortlessly.",
     image: images.onboarding1,
   },
   {
