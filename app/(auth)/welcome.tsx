@@ -1,4 +1,10 @@
-import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { router } from "expo-router";
 import Swiper from "react-native-swiper";
 import { useRef, useState } from "react";
@@ -27,8 +33,19 @@ const Onboarding = () => {
         onIndexChanged={(index) => setActiveIndex(index)}
       >
         {onboarding.map((item) => (
-          <View>
-            <Text>{item.title}</Text>
+          <View
+            className="flex flex-col items-center justify-center p-5"
+            key={item.id}
+          >
+            <Image source={item.image} className="w-full h-[300px]" />
+            <View className="flex flex-row items-center justify-center w-full mt-10">
+              <Text className="text-black text-3xl font-bold mx-10">
+                {item.title}
+              </Text>
+            </View>
+            <Text className="text-lg font-Jakartasem mx-10 mt-3 text-[#858585]">
+              {item.description}
+            </Text>
           </View>
         ))}
       </Swiper>
