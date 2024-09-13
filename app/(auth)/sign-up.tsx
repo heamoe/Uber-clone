@@ -3,6 +3,7 @@ import { icons, images } from "@/constants";
 import InputField from "@/components/InputField";
 import { useState } from "react";
 import CustomButton from "@/components/CustomButton";
+import { Link } from "expo-router";
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -54,13 +55,22 @@ const SignUp = () => {
               setForm({ ...form, confirmPassword: value })
             }
           />
-
           <CustomButton
             title="Sign Up"
             onPress={onSignUpPress}
             className="mt-6"
           />
+          //Oauth
+          <Link
+            href="/sign-in"
+            className="text-lg text-center text-general-200 mt-10"
+          >
+            <Text className="text-primary-100">
+              Already have an account? / Sign In
+            </Text>
+          </Link>
         </View>
+        //verifies model
       </View>
     </ScrollView>
   );
