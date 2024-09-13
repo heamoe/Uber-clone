@@ -4,6 +4,7 @@ import InputField from "@/components/InputField";
 import { useState } from "react";
 import CustomButton from "@/components/CustomButton";
 import { Link } from "expo-router";
+import OAuth from "@/components/OAuth";
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -60,17 +61,15 @@ const SignUp = () => {
             onPress={onSignUpPress}
             className="mt-6"
           />
-          //Oauth
+          <OAuth />
           <Link
             href="/sign-in"
             className="text-lg text-center text-general-200 mt-10"
           >
-            <Text className="text-primary-100">
-              Already have an account? / Sign In
-            </Text>
+            <Text>Already have an account?</Text>
+            <Text className="text-primary-100">Sign In</Text>
           </Link>
         </View>
-        //verifies model
       </View>
     </ScrollView>
   );
