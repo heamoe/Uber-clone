@@ -6,6 +6,7 @@ import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
 import OAuth from "@/components/OAuth";
 import { useSignUp } from "@clerk/clerk-expo";
+import { ReactNativeModal } from "react-native-modal";
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -126,6 +127,14 @@ const SignUp = () => {
             <Text className="text-primary-100">Sign In</Text>
           </Link>
         </View>
+        <ReactNativeModal isVisible={verification.state === "success"}>
+          <View className="bf-white px-7 py-9 rounded-2xl min-h-[300px]">
+            <Image
+              source={images.check}
+              className="w-[110px] h-[110px] mx-auto my-5"
+            />
+          </View>
+        </ReactNativeModal>
       </View>
     </ScrollView>
   );
