@@ -61,7 +61,7 @@ const SignUp = () => {
 
       if (completeSignUp.status === "complete") {
         //TODO database user
-        await setActive({ session: completeSignUp.createdSessionId });
+        await setActive?.({ session: completeSignUp.createdSessionId });
         setVerification({
           ...verification,
           state: "success",
