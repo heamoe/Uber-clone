@@ -8,6 +8,7 @@ import CustomButton from "@/components/CustomButton";
 import InputField from "@/components/InputField";
 import OAuth from "@/components/OAuth";
 import { icons, images } from "@/constants";
+import { fetchAPI } from "@/lib/fetch";
 
 const SignUp = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -17,7 +18,6 @@ const SignUp = () => {
     name: "",
     email: "",
     password: "",
-    confirmPassword: "",
   });
   const [verification, setVerification] = useState({
     state: "default",
@@ -26,18 +26,13 @@ const SignUp = () => {
   });
 
   const onSignUpPress = async () => {
-    if (!isLoaded) {
-      return;
-    }
-
+    if (!isLoaded) return;
     try {
       await signUp.create({
         emailAddress: form.email,
         password: form.password,
       });
-
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
-
       setVerification({
         ...verification,
         state: "pending",
@@ -45,22 +40,25 @@ const SignUp = () => {
     } catch (err: any) {
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
-      console.error(JSON.stringify(err, null, 2));
+      console.log(JSON.stringify(err, null, 2));
+      Alert.alert("Error", err.errors[0].longMessage);
     }
   };
-
   const onPressVerify = async () => {
-    if (!isLoaded) {
-      return;
-    }
-
+    if (!isLoaded) return;
     try {
       const completeSignUp = await signUp.attemptEmailAddressVerification({
         code: verification.code,
       });
-
       if (completeSignUp.status === "complete") {
-        //TODO database user
+        await fetchAPI("/(api)/user", {
+          method: "POST",
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            clerkId: completeSignUp.createdUserId,
+          }),
+        });
         await setActive?.({ session: completeSignUp.createdSessionId });
         setVerification({
           ...verification,
@@ -83,7 +81,6 @@ const SignUp = () => {
       });
     }
   };
-
   return (
     <ScrollView className="flex-1 bg-white">
       <View className="flex-1 bg-white">
@@ -116,15 +113,6 @@ const SignUp = () => {
             secureTextEntry={true}
             textContentType="password"
             value={form.password}
-            onChangeText={(value) => setForm({ ...form, password: value })}
-          />
-          <InputField
-            label="ConfirmPassword"
-            placeholder="Confirm Your Password"
-            icon={icons.lock}
-            secureTextEntry={true}
-            textContentType="password"
-            value={form.confirmPassword}
             onChangeText={(value) => setForm({ ...form, password: value })}
           />
           <CustomButton
