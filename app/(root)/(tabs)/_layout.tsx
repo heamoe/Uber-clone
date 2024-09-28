@@ -13,7 +13,12 @@ const TabIcon = ({
     className={`flex flex-row justify-center items-center rounded-full ${focused ? "bg-general-300" : ""}`}
   >
     <View>
-      <Image />
+      <Image
+        source={source}
+        tintColor="white"
+        resizeMode="contain"
+        className="w-7 h-7"
+      />
     </View>
   </View>
 );
