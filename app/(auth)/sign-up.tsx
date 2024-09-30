@@ -59,7 +59,7 @@ const SignUp = () => {
             clerkId: completeSignUp.createdUserId,
           }),
         });
-        await setActive?.({ session: completeSignUp.createdSessionId });
+        await setActive({ session: completeSignUp.createdSessionId });
         setVerification({
           ...verification,
           state: "success",
