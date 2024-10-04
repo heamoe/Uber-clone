@@ -7,7 +7,7 @@ export default function Page() {
   return (
     <SafeAreaView>
       <SignedIn>
-        <Text>Hello {user?.emailAddresses[0].emailAddress}</Text>
+        <Text>Hello! {user?.emailAddresses[0].emailAddress}</Text>
       </SignedIn>
     </SafeAreaView>
   );
