@@ -1,9 +1,14 @@
 import { SafeAreaView, Text } from "react-native";
+import { SignedIn, useUser } from "@clerk/clerk-expo";
 
-const Chat = () => {
+export default function Page() {
+  const { user } = useUser();
+
   return (
     <SafeAreaView>
-      <Text>Welcome to chat</Text>
+      <SignedIn>
+        <Text>Hello {user?.emailAddresses[0].emailAddress}</Text>
+      </SignedIn>
     </SafeAreaView>
   );
-};
+}
