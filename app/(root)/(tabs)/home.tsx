@@ -1,6 +1,6 @@
 import { SignedIn, useUser } from "@clerk/clerk-expo";
 import { FlatList, SafeAreaView, Text } from "react-native";
-import { RideCard } from "@/components/RideCard";
+import RideCard from "@/components/RideCard";
 
 const recentRides = [
   {
