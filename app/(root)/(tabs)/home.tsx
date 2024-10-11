@@ -1,6 +1,15 @@
 import { SignedIn, useUser } from "@clerk/clerk-expo";
-import { FlatList, SafeAreaView, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import RideCard from "@/components/RideCard";
+import { icons, images } from "@/constants";
 
 const recentRides = [
   {
@@ -110,7 +119,7 @@ const recentRides = [
 ];
 export default function Page() {
   const { user } = useUser();
-
+  const loading = false;
   return (
     <SafeAreaView className="bg-general-500 ">
       <FlatList
@@ -122,11 +131,34 @@ export default function Page() {
           paddingBottom: 100,
         }}
         ListEmptyComponent={() => (
-          <View>
-            <Text className="text-center text-general-700 mb-5">
-              No recent rides
-            </Text>
+          <View className="flex-1 flex-col items-center justify-center">
+            {!loading ? (
+              <>
+                <Image
+                  source={images.noResult}
+                  className="w-40 h-40"
+                  alt="No Recent Rides Found"
+                  resizeMode="contain"
+                />
+                <Text className="text-sm">No recent rides found.</Text>
+              </>
+            ) : (
+              <ActivityIndicator size="small" color="#000" />
+            )}
           </View>
+        )}
+        ListHeaderComponent={() => (
+          <>
+            <View className="flex flex-row items-center justify-between my-5">
+              <Text className="text-1xl font-JakartaExtraBold">
+                Welcome{"  "}
+                {user?.firstName || user?.emailAddresses[0].emailAddress}! 👋
+              </Text>
+              <TouchableOpacity>
+                <Image source={icons.out} className="w-4 h-4" alt="log out" />
+              </TouchableOpacity>
+            </View>
+          </>
         )}
       />
     </SafeAreaView>
