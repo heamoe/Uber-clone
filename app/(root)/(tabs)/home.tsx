@@ -165,6 +165,7 @@ export default function Page() {
                 <Image source={icons.out} className="w-4 h-4" alt="log out" />
               </TouchableOpacity>
             </View>
+            {/*Google text input for search ride*/}
           </>
         )}
       />
