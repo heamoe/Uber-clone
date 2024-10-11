@@ -120,6 +120,8 @@ const recentRides = [
 export default function Page() {
   const { user } = useUser();
   const loading = false;
+  const handleSignOut = () => {};
+
   return (
     <SafeAreaView className="bg-general-500 ">
       <FlatList
@@ -150,11 +152,16 @@ export default function Page() {
         ListHeaderComponent={() => (
           <>
             <View className="flex flex-row items-center justify-between my-5">
-              <Text className="text-1xl font-JakartaExtraBold">
-                Welcome{"  "}
-                {user?.firstName || user?.emailAddresses[0].emailAddress}! 👋
+              <Text className="text-2xl font-JakartaExtraBold capitalize">
+                Welcome{",  "}
+                {user?.firstName ||
+                  user?.emailAddresses[0].emailAddress.split("@")[0]}
+                ! 👋
               </Text>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onpress={handleSignOut}
+                className="justify-center items-center w-10 h-10 rounded-full bg-white "
+              >
                 <Image source={icons.out} className="w-4 h-4" alt="log out" />
               </TouchableOpacity>
             </View>
