@@ -1,5 +1,5 @@
 import { SignedIn, useUser } from "@clerk/clerk-expo";
-import { FlatList, SafeAreaView, Text } from "react-native";
+import { FlatList, SafeAreaView, Text, View } from "react-native";
 import RideCard from "@/components/RideCard";
 
 const recentRides = [
@@ -116,6 +116,18 @@ export default function Page() {
       <FlatList
         data={recentRides?.slice(0, 5)}
         renderItem={({ item }) => <RideCard ride={item} />}
+        className="px-5"
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{
+          paddingBottom: 100,
+        }}
+        ListEmptyComponent={() => (
+          <View>
+            <Text className="text-center text-general-700 mb-5">
+              No recent rides
+            </Text>
+          </View>
+        )}
       />
     </SafeAreaView>
   );
