@@ -16,6 +16,8 @@ const Map = () => {
       mapType="mutedStandard"
       showPointsOfInterest={false}
       //initialRegion={{}}
+      showsUserLocation={true}
+      userInteraction="light"
     >
       <Text>Map</Text>
     </MapView>
