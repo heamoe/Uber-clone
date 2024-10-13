@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import RideCard from "@/components/RideCard";
 import { icons, images } from "@/constants";
+import GoogleTextInput from "@/components/GoogleTextInput";
 
 const recentRides = [
   {
@@ -121,6 +122,7 @@ export default function Page() {
   const { user } = useUser();
   const loading = false;
   const handleSignOut = () => {};
+  const handleDestinationPress = () => {};
 
   return (
     <SafeAreaView className="bg-general-500 ">
@@ -165,7 +167,11 @@ export default function Page() {
                 <Image source={icons.out} className="w-4 h-4" alt="log out" />
               </TouchableOpacity>
             </View>
-            {/*Google text input for search ride*/}
+            <GoogleTextInput
+              icon={icons.search}
+              containerStyle="bg-white shadow-md shadow-netural-300"
+              handlePress={handleDestinationPress}
+            />
           </>
         )}
       />
