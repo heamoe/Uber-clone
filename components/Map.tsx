@@ -2,7 +2,8 @@ import { Text } from "react-native";
 import MapView, { PROVIDER_DEFAULT } from "react-native-maps";
 import { useDriverStore, useLocationStore } from "@/store";
 import { calculateRegion, generateMarkersFromData } from "@/lib/map";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { MarkerData } from "@/types/type";
 
 const drivers = [
   {
@@ -58,8 +59,8 @@ const Map = () => {
     destinationLongitude,
   } = useLocationStore;
 
-  const { Driver, setDrivers } = useDriverStore();
-
+  const { selectedDriver, setDrivers } = useDriverStore();
+  const [markers, setMarkers] = useState<MarkerData[]>([]);
   const region = calculateRegion({
     userLatitude,
     userLongitude,
@@ -75,6 +76,7 @@ const Map = () => {
         userLatitude,
         userLongitude,
       });
+      setMarkers(newMarkers);
     }
   }, [setDrivers]);
   return (
