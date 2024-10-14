@@ -43,8 +43,8 @@ export const calculateRegion = ({
 }) => {
   if (!userLatitude || !userLongitude) {
     return {
-      latitude: 37.78825,
-      longitude: -122.4324,
+      latitude: 43.7615, // North York, Toronto latitude
+      longitude: -79.4111, // North York, Toronto longitude
       latitudeDelta: 0.01,
       longitudeDelta: 0.01,
     };
