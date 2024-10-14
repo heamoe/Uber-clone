@@ -19,7 +19,13 @@ export const generateMarkersFromData = ({
       latitude: userLatitude + latOffset,
       longitude: userLongitude + lngOffset,
       title: `${driver.first_name} ${driver.last_name}`,
-      ...driver,
+      profile_image_url: driver.profile_image_url,
+      car_image_url: driver.car_image_url,
+      car_seats: driver.car_seats,
+      rating: driver.rating,
+      first_name: driver.first_name,
+      last_name: driver.last_name,
+      id: driver.driver_id, // Ensure id is present
     };
   });
 };
