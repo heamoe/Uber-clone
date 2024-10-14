@@ -1,9 +1,10 @@
 import { Text } from "react-native";
-import MapView, { PROVIDER_DEFAULT } from "react-native-maps";
+import MapView, { Marker, PROVIDER_DEFAULT } from "react-native-maps";
 import { useDriverStore, useLocationStore } from "@/store";
 import { calculateRegion, generateMarkersFromData } from "@/lib/map";
 import { useEffect, useState } from "react";
 import { MarkerData } from "@/types/type";
+import { icons } from "@/constants";
 
 const drivers = [
   {
@@ -90,7 +91,19 @@ const Map = () => {
       showsUserLocation={true}
       userInteraction="light"
     >
-      <Text>Map</Text>
+      {markers.map((marker) => (
+        <Marker
+          key={marker.id}
+          coordinate={{
+            latitude: marker.latitude,
+            longitude: marker.longitude,
+          }}
+          title={marker.title}
+          image={
+            selectedDriver === marker.id ? icons.selectedMarker : icons.marker
+          }
+        />
+      ))}
     </MapView>
   );
 };
