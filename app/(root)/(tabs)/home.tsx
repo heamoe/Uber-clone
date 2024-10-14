@@ -123,7 +123,7 @@ const recentRides = [
   },
 ];
 export default function Page() {
-  const { setUserLocation, setDestinationLocation } = useLocationStore;
+  const { setUserLocation, setDestinationLocation } = useLocationStore();
   const { user } = useUser();
   const loading = false;
   const [hasPermission, setHasPermission] = useState(false);
@@ -139,14 +139,17 @@ export default function Page() {
       }
 
       let location = await Location.getCurrentPositionAsync({});
+      console.log("Location:", location);
 
       const address = await Location.reverseGeocodeAsync({
         latitude: location.coords?.latitude!,
         longitude: location.coords?.longitude!,
       });
+      console.log("Address:", address);
+
       setUserLocation({
-        latitude: location.coords?.latitude,
-        longitude: location.coords?.longitude,
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
         address: `${address[0].name}, ${address[0].region}`,
       });
     };
@@ -197,7 +200,7 @@ export default function Page() {
               </TouchableOpacity>
             </View>
             <GoogleTextInput
-              icon={icons.search}
+              icon="icons.search"
               containerStyle="bg-white shadow-md shadow-netural-300"
               handlePress={handleDestinationPress}
             />

@@ -1,10 +1,13 @@
-import { Text } from "react-native";
+import React, { useEffect, useState } from "react";
 import MapView, { Marker, PROVIDER_DEFAULT } from "react-native-maps";
-import { useDriverStore, useLocationStore } from "@/store";
-import { calculateRegion, generateMarkersFromData } from "@/lib/map";
-import { useEffect, useState } from "react";
-import { MarkerData } from "@/types/type";
 import { icons } from "@/constants";
+import {
+  calculateDriverTimes,
+  calculateRegion,
+  generateMarkersFromData,
+} from "@/lib/map";
+import { useDriverStore, useLocationStore } from "@/store";
+import { Driver, MarkerData } from "@/types/type";
 
 const drivers = [
   {
@@ -58,7 +61,12 @@ const Map = () => {
     userLatitude,
     destinationLatitude,
     destinationLongitude,
-  } = useLocationStore;
+  } = useLocationStore();
+
+  useEffect(() => {
+    console.log("User Latitude:", userLatitude);
+    console.log("User Longitude:", userLongitude);
+  }, [userLatitude, userLongitude]);
 
   const { selectedDriver, setDrivers } = useDriverStore();
   const [markers, setMarkers] = useState<MarkerData[]>([]);
@@ -79,7 +87,7 @@ const Map = () => {
       });
       setMarkers(newMarkers);
     }
-  }, [setDrivers]);
+  }, [drivers]);
   return (
     <MapView
       provider={PROVIDER_DEFAULT}
