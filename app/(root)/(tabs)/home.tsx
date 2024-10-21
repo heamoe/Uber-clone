@@ -208,7 +208,7 @@ export default function Page() {
               </TouchableOpacity>
             </View>
             <GoogleTextInput
-              icon="icons.search"
+              icon={icons.search}
               containerStyle="bg-white shadow-md shadow-netural-300"
               handlePress={handleDestinationPress}
             />

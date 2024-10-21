@@ -6,7 +6,15 @@ import { icons } from "@/constants";
 import Map from "@/components/Map";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 
-const RideLayout = ({ title, children }: { children: React.ReactNode }) => {
+const RideLayout = ({
+  title,
+  children,
+  snapPoints,
+}: {
+  title: string;
+  children: React.ReactNode;
+  snapPoints: string[];
+}) => {
   const bottomSheetRef = React.useRef<BottomSheet>(null);
   return (
     <GestureHandlerRootView>
@@ -28,7 +36,12 @@ const RideLayout = ({ title, children }: { children: React.ReactNode }) => {
           </View>
           <Map />
         </View>
-        <BottomSheet ref={bottomSheetRef} snapPoints={["40%", "85%"]} index={0}>
+        <BottomSheet
+          keyboardBehavior="extend"
+          ref={bottomSheetRef}
+          snapPoints={snapPoints || ["40%", "85%"]}
+          index={0}
+        >
           <BottomSheetView style={{ flex: 1, padding: 10 }}>
             {children}
           </BottomSheetView>

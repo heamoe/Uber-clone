@@ -14,7 +14,7 @@ const FindRide = () => {
     setDestinationLocation,
   } = useLocationStore();
   return (
-    <RideLayout>
+    <RideLayout title="FindRide" snapPoints={["85%"]}>
       <View className="my-3">
         <Text className="text-lg font-JakartaSemiBold mb-3">from</Text>
         <GoogleTextInput
@@ -37,7 +37,7 @@ const FindRide = () => {
       </View>
       <CustomButton
         title="Find Ride"
-        onPress={() => router.push("/ride-confirm-ride")}
+        onPress={() => router.push("/(root)/confirm-ride")}
         className="mt-5"
       />
     </RideLayout>

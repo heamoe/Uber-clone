@@ -1,10 +1,11 @@
-import { View } from "react-native";
+import { View, Text } from "react-native";
+import RideLayout from "@/components/RideLayout";
 
 const confirmRide = () => {
   return (
-    <View>
-      <h1>Confirm Ride</h1>
-    </View>
+    <RideLayout title="Choose a Driver" style={["65%", "85%"]}>
+      <Text>confirmRide</Text>
+    </RideLayout>
   );
 };
 
