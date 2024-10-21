@@ -65,7 +65,7 @@ const GoogleTextInput = ({
         renderLeftButton={() => (
           <View className="justify-center items-center w-6 h-6">
             <Image
-              source={icons.search}
+              source={icon ? icon : icons.search}
               className="w-6 h-6"
               resizeMode="contain"
             />
