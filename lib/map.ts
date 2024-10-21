@@ -49,7 +49,6 @@ export const calculateRegion = ({
       longitudeDelta: 0.01,
     };
   }
-
   if (!destinationLatitude || !destinationLongitude) {
     return {
       latitude: userLatitude,
