@@ -1,5 +1,6 @@
-import { View, Text } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import RideLayout from "@/components/RideLayout";
+import DriverCard from "@/components/DriverCard";
 
 const drivers = [
   {
@@ -50,7 +51,10 @@ const drivers = [
 const confirmRide = () => {
   return (
     <RideLayout title="Choose a Driver" style={["65%", "85%"]}>
-      <Text>confirmRide</Text>
+      <FlatList
+        data={drivers}
+        renderItem={({ item }) => <DriverCard item={item} />}
+      />
     </RideLayout>
   );
 };
