@@ -8,7 +8,7 @@ import { formatTime } from "@/lib/utils";
 import { useDriverStore, useLocationStore } from "@/store";
 
 const BookRide = () => {
-  const { user } = useUser();
+  //const { user } = useUser();
   const { userAddress, destinationAddress } = useLocationStore();
   const { drivers, selectedDriver } = useDriverStore();
 
@@ -63,7 +63,7 @@ const BookRide = () => {
             <View className="flex flex-row items-center justify-between w-full border-b border-white py-3">
               <Text className="text-lg font-JakartaRegular">Pickup Time</Text>
               <Text className="text-lg font-JakartaRegular">
-                {formatTime(driverDetails?.time!)}
+                {formatTime(driverDetails?.time || 5!)}
               </Text>
             </View>
 

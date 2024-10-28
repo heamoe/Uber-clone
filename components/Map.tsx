@@ -14,6 +14,7 @@ const drivers = [
     driver_id: 1,
     first_name: "James",
     last_name: "Wilson",
+    time: 5,
     profile_image_url:
       "https://ucarecdn.com/dae59f69-2c1f-48c3-a883-017bcf0f9950/-/preview/1000x666/",
     car_image_url:
@@ -25,6 +26,7 @@ const drivers = [
     driver_id: 2,
     first_name: "David",
     last_name: "Brown",
+    time: 5,
     profile_image_url:
       "https://ucarecdn.com/6ea6d83d-ef1a-483f-9106-837a3a5b3f67/-/preview/1000x666/",
     car_image_url:
@@ -36,6 +38,7 @@ const drivers = [
     driver_id: 3,
     first_name: "Michael",
     last_name: "Johnson",
+    time: 5,
     profile_image_url:
       "https://ucarecdn.com/0330d85c-232e-4c30-bd04-e5e4d0e3d688/-/preview/826x822/",
     car_image_url:
@@ -47,6 +50,7 @@ const drivers = [
     driver_id: 4,
     first_name: "Robert",
     last_name: "Green",
+    time: 5,
     profile_image_url:
       "https://ucarecdn.com/fdfc54df-9d24-40f7-b7d3-6f391561c0db/-/preview/626x417/",
     car_image_url:

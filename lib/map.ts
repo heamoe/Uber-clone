@@ -25,7 +25,7 @@ export const generateMarkersFromData = ({
       rating: driver.rating,
       first_name: driver.first_name,
       last_name: driver.last_name,
-      id: driver.driver_id, // Ensure id is present
+      id: driver.driver_id,
     };
   });
 };
