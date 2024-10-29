@@ -7,14 +7,14 @@ import { useDriverStore } from "@/store";
 
 const confirmRide = () => {
   const { drivers, selectedDriver, setSelectedDriver } = useDriverStore();
-  //console.log("driver:", drivers[0].driver_id);
   return (
     <RideLayout title="Choose a Driver" style={["65%", "85%"]}>
       <FlatList
         data={drivers}
+        keyExtractor={(item) => item.driver_id.toString()} // 添加 keyExtractor
         renderItem={({ item }) => (
           <DriverCard
-            Selected={selectedDriver!}
+            selected={selectedDriver!} // 确保传递的是 selectedDriver
             setSelected={() => {
               console.log("Selected Driver ID:", item.driver_id);
               setSelectedDriver(item.driver_id);

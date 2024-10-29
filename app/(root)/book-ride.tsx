@@ -13,7 +13,7 @@ const BookRide = () => {
   const { drivers, selectedDriver } = useDriverStore();
 
   const driverDetails = drivers?.filter(
-    (driver) => +driver.id === selectedDriver,
+    (driver) => +driver.driver_id === selectedDriver,
   )[0];
 
   return (

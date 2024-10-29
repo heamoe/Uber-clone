@@ -1,6 +1,5 @@
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-
 import { icons } from "@/constants";
 import { formatTime } from "@/lib/utils";
 import { DriverCardProps } from "@/types/type";
@@ -10,8 +9,8 @@ const DriverCard = ({ item, selected, setSelected }: DriverCardProps) => {
     <TouchableOpacity
       onPress={setSelected}
       className={`${
-        selected === item.id ? "bg-general-600" : "bg-white"
-      } flex flex-row items-center justify-between py-5 px-3 rounded-xl`}
+        selected === item.driver_id ? "bg-general-600" : "bg-white"
+      } flex flex-row items-center justify-between py-5 px-3 rounded-xl`} // 确保这里比较的是 driver_id
     >
       <Image
         source={{ uri: item.profile_image_url }}
@@ -20,11 +19,13 @@ const DriverCard = ({ item, selected, setSelected }: DriverCardProps) => {
 
       <View className="flex-1 flex flex-col items-start justify-center mx-3">
         <View className="flex flex-row items-center justify-start mb-1">
-          <Text className="text-lg font-JakartaRegular">{item.title}</Text>
+          <Text className="text-lg font-JakartaRegular">
+            {item.first_name} {item.last_name}
+          </Text>
 
           <View className="flex flex-row items-center space-x-1 ml-2">
             <Image source={icons.star} className="w-3.5 h-3.5" />
-            <Text className="text-sm font-JakartaRegular">4</Text>
+            <Text className="text-sm font-JakartaRegular">{item.rating}</Text>
           </View>
         </View>
 
