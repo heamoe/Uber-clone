@@ -1,9 +1,11 @@
 import CustomButton from "@/components/CustomButton";
 import { PaymentSheetError, useStripe } from "@stripe/stripe-react-native";
 import { View, Button, Alert } from "react-native";
+import { useState } from "react";
 
 const Payment = () => {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
+  const [success, setSuccess] = useState(false);
 
   const initializePaymentSheet = async () => {
     const { error } = await initPaymentSheet({
@@ -43,13 +45,9 @@ const Payment = () => {
     const { error } = await presentPaymentSheet();
 
     if (error) {
-      if (error.code === PaymentSheetError.Canceled) {
-        Alert.alert(`Error Code:  ${error.code}`, error.message);
-      } else {
-        // PaymentSheet encountered an unrecoverable error. You can display the error to the user, log it, etc.
-      }
+      Alert.alert(`Error Code:  ${error.code}`, error.message);
     } else {
-      // Payment completed - show a confirmation screen.
+      setSuccess(true);
     }
   };
   return (
