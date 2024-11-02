@@ -1,6 +1,7 @@
 import CustomButton from "@/components/CustomButton";
 import { PaymentSheetError, useStripe } from "@stripe/stripe-react-native";
-import { View, Button } from "react-native";
+import { View, Button, Alert } from "react-native";
+
 const Payment = () => {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
 
@@ -38,11 +39,12 @@ const Payment = () => {
   };
 
   const openPaymentSheet = async () => {
+    await initializePaymentSheet();
     const { error } = await presentPaymentSheet();
 
     if (error) {
       if (error.code === PaymentSheetError.Canceled) {
-        // Customer canceled - you should probably do nothing.
+        Alert.alert("Error Code:  ${ error.code }", error.message);
       } else {
         // PaymentSheet encountered an unrecoverable error. You can display the error to the user, log it, etc.
       }
