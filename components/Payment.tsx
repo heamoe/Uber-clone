@@ -44,7 +44,7 @@ const Payment = () => {
 
     if (error) {
       if (error.code === PaymentSheetError.Canceled) {
-        Alert.alert("Error Code:  ${ error.code }", error.message);
+        Alert.alert(`Error Code:  ${error.code}`, error.message);
       } else {
         // PaymentSheet encountered an unrecoverable error. You can display the error to the user, log it, etc.
       }
