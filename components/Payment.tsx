@@ -6,6 +6,26 @@ import { useState } from "react";
 const Payment = () => {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [success, setSuccess] = useState(false);
+  const confirmHandler = async (
+    paymentMethod,
+    shouldSavePaymentMethod,
+    intentCreationCallback,
+  ) => {
+    // Make a request to your own server.
+    const response = await fetch(`${API_URL}/create-intent`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    // Call the `intentCreationCallback` with your server response's client secret or error
+    const { client_secret, error } = await response.json();
+    if (client_secret) {
+      intentCreationCallback({ clientSecret: client_secret });
+    } else {
+      intentCreationCallback({ error });
+    }
+  };
 
   const initializePaymentSheet = async () => {
     const { error } = await initPaymentSheet({
@@ -21,23 +41,6 @@ const Payment = () => {
     if (error) {
       // handle error
     }
-  };
-
-  const confirmHandler = async (
-    paymentMethod,
-    shouldSavePaymentMethod,
-    intentCreationCallback,
-  ) => {
-    // explained later
-
-    const didTapCheckoutButton = async () => {
-      // implement later
-    };
-    return (
-      <View>
-        <Button title="Checkout" onPress={didTapCheckoutButton} />
-      </View>
-    );
   };
 
   const openPaymentSheet = async () => {
