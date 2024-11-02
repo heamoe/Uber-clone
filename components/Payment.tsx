@@ -42,7 +42,7 @@ const Payment = ({
         }),
       });
     }
-
+    //TODO handle error
     const { client_secret, error } = await response.json();
     if (client_secret) {
       intentCreationCallback({ clientSecret: client_secret });
