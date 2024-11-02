@@ -1,9 +1,7 @@
 import CustomButton from "@/components/CustomButton";
-import { useStripe } from "@stripe/stripe-react-native";
+import { PaymentSheetError, useStripe } from "@stripe/stripe-react-native";
 import { View, Button } from "react-native";
-import { useEffect, useState } from "react";
 const Payment = () => {
-  const [publishableKey, setPublishableKey] = useState("");
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
 
   const initializePaymentSheet = async () => {
@@ -22,10 +20,6 @@ const Payment = () => {
     }
   };
 
-  useEffect(() => {
-    initializePaymentSheet();
-  }, []);
-
   const confirmHandler = async (
     paymentMethod,
     shouldSavePaymentMethod,
@@ -43,16 +37,18 @@ const Payment = () => {
     );
   };
 
-  const fetchPublishableKey = async () => {
-    //const key = await fetchKey(); // fetch key from your server here
-    //setPublishableKey(key);
-  };
-
-  useEffect(() => {
-    fetchPublishableKey();
-  }, []);
   const openPaymentSheet = async () => {
-    // open payment sheet
+    const { error } = await presentPaymentSheet();
+
+    if (error) {
+      if (error.code === PaymentSheetError.Canceled) {
+        // Customer canceled - you should probably do nothing.
+      } else {
+        // PaymentSheet encountered an unrecoverable error. You can display the error to the user, log it, etc.
+      }
+    } else {
+      // Payment completed - show a confirmation screen.
+    }
   };
   return (
     <>
