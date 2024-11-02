@@ -21,7 +21,7 @@ const Payment = ({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: fullName || email.spliat("@")[0],
+          name: fullName || email.split("@")[0],
           email: email,
           amount: amount,
           driverId: driverId,
@@ -32,6 +32,15 @@ const Payment = ({
     );
 
     if (paymentIntent.client_secret) {
+      const { result } = await fetchAPI("/(api)/(stripe)/pay", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          payment_method_id: paymentMethod.id,
+          payment_intent_id: paymentIntent.id,
+          customer_id: customerId,
+        }),
+      });
     }
 
     const { client_secret, error } = await response.json();
