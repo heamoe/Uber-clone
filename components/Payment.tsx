@@ -41,8 +41,10 @@ const Payment = ({
           customer_id: customerId,
         }),
       });
+      if (result.client_secret) {
+        //ride/create
+      }
     }
-    //TODO handle error
     const { client_secret, error } = await response.json();
     if (client_secret) {
       intentCreationCallback({ clientSecret: client_secret });
