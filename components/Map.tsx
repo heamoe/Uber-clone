@@ -84,6 +84,7 @@ const Map = () => {
   useEffect(() => {
     //TODO: get drivers from API
     setDrivers(drivers);
+
     if (Array.isArray(drivers)) {
       if (!userLatitude || !userLongitude) return;
       const newMarkers = generateMarkersFromData({
@@ -107,14 +108,16 @@ const Map = () => {
     >
       {markers.map((marker) => (
         <Marker
-          key={marker.id}
+          key={marker.driver_id}
           coordinate={{
             latitude: marker.latitude,
             longitude: marker.longitude,
           }}
           title={marker.title}
           image={
-            selectedDriver === marker.id ? icons.selectedMarker : icons.marker
+            selectedDriver === marker.driver_id
+              ? icons.selectedMarker
+              : icons.marker
           }
         />
       ))}
