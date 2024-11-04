@@ -8,6 +8,8 @@ import {
 } from "@/lib/map";
 import { useDriverStore, useLocationStore } from "@/store";
 import { Driver, MarkerData } from "@/types/type";
+import { useFetch } from "@/lib/fetch";
+import { ActivityIndicator, Text, View } from "react-native";
 
 const drivers = [
   {
@@ -60,6 +62,7 @@ const drivers = [
   },
 ];
 const Map = () => {
+  const { data: drivers, loading, error } = useFetch<Driver[]>("/(api)/driver");
   const {
     userLongitude,
     userLatitude,
@@ -95,6 +98,20 @@ const Map = () => {
       setMarkers(newMarkers);
     }
   }, [drivers]);
+  if (loading || !userLatitude || !userLongitude) {
+    return (
+      <View className="flex justify-between items-center w-full">
+        <ActivityIndicator size="large" color="#000" />
+      </View>
+    );
+  }
+  if (error) {
+    return (
+      <View className="flex justify-between items-center w-full">
+        <Text className="text-red-500">{error}</Text>
+      </View>
+    );
+  }
   return (
     <MapView
       provider={PROVIDER_DEFAULT}
