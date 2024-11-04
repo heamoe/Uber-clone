@@ -10,7 +10,7 @@ const DriverCard = ({ item, selected, setSelected }: DriverCardProps) => {
       onPress={setSelected}
       className={`${
         selected === item.driver_id ? "bg-general-600" : "bg-white"
-      } flex flex-row items-center justify-between py-5 px-3 rounded-xl`} // 确保这里比较的是 driver_id
+      } flex flex-row items-center justify-between py-5 px-3 rounded-xl`}
     >
       <Image
         source={{ uri: item.profile_image_url }}
@@ -42,7 +42,7 @@ const DriverCard = ({ item, selected, setSelected }: DriverCardProps) => {
           </Text>
 
           <Text className="text-sm font-JakartaRegular text-general-800">
-            {formatTime(item.time!)}
+            {formatTime(parseInt(`${item.time!}`) || 5)}
           </Text>
 
           <Text className="text-sm font-JakartaRegular text-general-800 mx-1">

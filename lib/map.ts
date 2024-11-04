@@ -19,17 +19,10 @@ export const generateMarkersFromData = ({
       latitude: userLatitude + latOffset,
       longitude: userLongitude + lngOffset,
       title: `${driver.first_name} ${driver.last_name}`,
-      profile_image_url: driver.profile_image_url,
-      car_image_url: driver.car_image_url,
-      car_seats: driver.car_seats,
-      rating: driver.rating,
-      first_name: driver.first_name,
-      last_name: driver.last_name,
-      id: driver.driver_id,
+      ...driver,
     };
   });
 };
-
 export const calculateRegion = ({
   userLatitude,
   userLongitude,
@@ -104,18 +97,19 @@ export const calculateDriverTimes = async ({
         `https://maps.googleapis.com/maps/api/directions/json?origin=${marker.latitude},${marker.longitude}&destination=${userLatitude},${userLongitude}&key=${directionsAPI}`,
       );
       const dataToUser = await responseToUser.json();
-      const timeToUser = dataToUser.routes[0].legs[0].duration.value; // Time in seconds
+      console.log(dataToUser.routes[0].legs);
+
+      const timeToUser = dataToUser.routes[0].legs[0]?.duration.value!; // Time in seconds
 
       const responseToDestination = await fetch(
         `https://maps.googleapis.com/maps/api/directions/json?origin=${userLatitude},${userLongitude}&destination=${destinationLatitude},${destinationLongitude}&key=${directionsAPI}`,
       );
       const dataToDestination = await responseToDestination.json();
       const timeToDestination =
-        dataToDestination.routes[0].legs[0].duration.value; // Time in seconds
+        dataToDestination.routes[0].legs[0]?.duration.value!; // Time in seconds
 
       const totalTime = (timeToUser + timeToDestination) / 60; // Total time in minutes
       const price = (totalTime * 0.5).toFixed(2); // Calculate price based on time
-
       return { ...marker, time: totalTime, price };
     });
 
