@@ -20,9 +20,9 @@ const Map = () => {
   } = useLocationStore();
 
   /*  useEffect(() => {
-          console.log("User Latitude:", userLatitude);
-          console.log("User Longitude:", userLongitude);
-        }, [userLatitude, userLongitude]);*/
+            console.log("User Latitude:", userLatitude);
+            console.log("User Longitude:", userLongitude);
+          }, [userLatitude, userLongitude]);*/
 
   const { selectedDriver, setDrivers } = useDriverStore();
   const { data: drivers, loading, error } = useFetch<Driver[]>("/(api)/driver");
@@ -46,7 +46,7 @@ const Map = () => {
       //console.log("newMarkers", newMarkers);
       setMarkers(newMarkers);
     }
-  }, [drivers]);
+  }, [drivers, userLatitude, userLongitude]);
 
   useEffect(() => {
     if (markers.length > 0 && destinationLongitude && destinationLatitude) {
@@ -102,6 +102,20 @@ const Map = () => {
           }
         />
       ))}
+
+      {destinationLatitude && destinationLongitude && (
+        <>
+          <Marker
+            key="destination"
+            coordinate={{
+              latitude: destinationLatitude,
+              longitude: destinationLongitude,
+            }}
+            title="Destination"
+            image={icons.pin}
+          />
+        </>
+      )}
     </MapView>
   );
 };
