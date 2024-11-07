@@ -10,6 +10,7 @@ import { useDriverStore, useLocationStore } from "@/store";
 import { Driver, MarkerData } from "@/types/type";
 import { useFetch } from "@/lib/fetch";
 import { ActivityIndicator, Text, View } from "react-native";
+import MapViewDirections from "react-native-maps-directions";
 
 const Map = () => {
   const {
@@ -113,6 +114,17 @@ const Map = () => {
             }}
             title="Destination"
             image={icons.pin}
+          />
+
+          <MapViewDirections
+            origin={{ latitude: userLatitude, longitude: userLongitude }}
+            destination={{
+              latitude: destinationLatitude,
+              longitude: destinationLongitude,
+            }}
+            apikey={process.env.EXPO_PUBLIC_GOOGLE_API_KEY}
+            strokeWidth={3}
+            strokeColor="red"
           />
         </>
       )}
