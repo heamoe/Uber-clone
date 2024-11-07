@@ -43,6 +43,7 @@ const Payment = ({
       });
       if (result.client_secret) {
         //ride/create
+        setSuccess(true);
       }
     }
     const { client_secret, error } = await response.json();
