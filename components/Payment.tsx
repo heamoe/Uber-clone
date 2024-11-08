@@ -4,6 +4,8 @@ import { View, Button, Alert } from "react-native";
 import { useState } from "react";
 import { fetchAPI } from "@/lib/fetch";
 import { PaymentProps } from "@/types/type";
+import { useLocationStore } from "@/store";
+import { useAuth } from "@clerk/clerk-expo";
 
 const Payment = ({
   fullName,
@@ -14,6 +16,15 @@ const Payment = ({
 }: PaymentProps) => {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [success, setSuccess] = useState(false);
+  const { userId } = useAuth();
+  const {
+    userAddress,
+    userLongitude,
+    userLatitude,
+    destinationLatitude,
+    destinationAddress,
+    destinationLongitude,
+  } = useLocationStore();
   const confirmHandler = async (paymentMethod, _, intentCreationCallback) => {
     const { paymentIntent, customerId } = await fetchAPI(
       "/(api)/(stripe)/create",
@@ -42,8 +53,28 @@ const Payment = ({
         }),
       });
       if (result.client_secret) {
-        //ride/create
-        setSuccess(true);
+        await fetchAPI("/(api)/ride/create", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            origin_address: userAddress,
+            destination_address: destinationAddress,
+            origin_latitude: userLatitude,
+            origin_longitude: userLongitude,
+            destination_latitude: destinationLatitude,
+            destination_longitude: destinationLongitude,
+            ride_time: rideTime.toFixed(0),
+            fare_price: parseInt(amount) * 100,
+            payment_status: "paid",
+            driver_id: driverId,
+            user_id: userId,
+          }),
+        });
+        intentCreationCallback({
+          clientSecret: result.client_secret,
+        });
       }
     }
     const { client_secret, error } = await response.json();
