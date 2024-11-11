@@ -77,12 +77,6 @@ const Payment = ({
         });
       }
     }
-    const { client_secret, error } = await response.json();
-    if (client_secret) {
-      intentCreationCallback({ clientSecret: client_secret });
-    } else {
-      intentCreationCallback({ error });
-    }
   };
 
   const initializePaymentSheet = async () => {
@@ -95,9 +89,10 @@ const Payment = ({
         },
         confirmHandler: confirmHandler,
       },
+      returnURL: "myapp://book-ride",
     });
     if (error) {
-      // handle error
+      console.log("Error initializing payment sheet", error);
     }
   };
 
