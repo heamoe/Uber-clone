@@ -4,11 +4,21 @@ export const fetchAPI = async (url: string, options?: RequestInit) => {
   try {
     const response = await fetch(url, options);
     if (!response.ok) {
-      new Error(`HTTP error! status: ${response.status}`);
+      console.error(`HTTP error! Status: ${response.status}, URL: ${url}`);
+      const errorText = await response.text();
+      console.error("Error Response Text:", errorText);
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+    try {
+      return await response.json();
+    } catch (jsonError) {
+      console.error("JSON Parse Error: Unexpected response format");
+      const errorText = await response.text();
+      console.error("Response Text:", errorText);
+      throw new SyntaxError("JSON Parse error");
+    }
   } catch (error) {
-    console.error("Fetch error:", error);
+    console.error("Fetch error at:", error.stack);
     throw error;
   }
 };
