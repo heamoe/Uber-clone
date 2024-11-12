@@ -31,10 +31,10 @@ const Payment = ({
 
   const initializePaymentSheet = async () => {
     const { error } = await initPaymentSheet({
-      merchantDisplayName: "Example, Inc.",
+      merchantDisplayName: "Uber,Inc.",
       intentConfiguration: {
         mode: {
-          amount: 1099,
+          amount: parseInt(amount) * 100,
           currencyCode: "USD",
         },
         confirmHandler: async (
@@ -117,6 +117,7 @@ const Payment = ({
       setSuccess(true);
     }
   };
+
   return (
     <>
       <CustomButton
@@ -126,7 +127,7 @@ const Payment = ({
       />
 
       <ReactNativeModal
-        isvisible={success}
+        isVisible={success}
         onBackdropPress={() => setSuccess(false)}
       >
         <View className="flex flex-col items-center justify-center bg-white p-7 rounded-2xl">
