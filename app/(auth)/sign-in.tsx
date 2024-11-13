@@ -14,7 +14,7 @@ const SignIn = () => {
     email: "",
     password: "",
   });
-  const onSignInPress = useCallback(async () => {
+  const onLogInPress = useCallback(async () => {
     if (!isLoaded) {
       return;
     }
@@ -49,14 +49,14 @@ const SignIn = () => {
         <View className="p-5">
           <InputField
             label="Email"
-            placeholder="Enter name"
+            placeholder="Enter Email"
             icon={icons.email}
             value={form.email}
             onChangeText={(value) => setForm({ ...form, email: value })}
           />
           <InputField
             label="Password"
-            placeholder="Enter name"
+            placeholder="Enter Password"
             icon={icons.lock}
             value={form.password}
             secureTextEntry={true}
