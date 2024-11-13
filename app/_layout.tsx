@@ -18,7 +18,7 @@ const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
-LogBox.ignoreLogs(["Warning: ..."]);
+LogBox.ignoreLogs(["Clerk:"]);
 export default function RootLayout() {
   const [loaded] = useFonts({
     "Jakarta-Bold": require("../assets/fonts/PlusJakartaSans-Bold.ttf"),
