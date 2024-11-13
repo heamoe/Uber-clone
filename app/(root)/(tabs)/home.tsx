@@ -1,4 +1,4 @@
-import { SignedIn, useUser } from "@clerk/clerk-expo";
+import { SignedIn, useAuth, useOAuth, useUser } from "@clerk/clerk-expo";
 import * as Location from "expo-location";
 import {
   ActivityIndicator,
@@ -23,7 +23,11 @@ export default function Page() {
   const { user } = useUser();
   const { data: recentRides, loading } = useFetch(`/(api)/ride/${user.id}`);
   const [hasPermission, setHasPermission] = useState(false);
-  const handleSignOut = () => {};
+  const { signOut } = useAuth();
+  const handleSignOut = () => {
+    signOut();
+    router.replace("/(auth)/sign-in");
+  };
   const handleDestinationPress = (location: {
     latitude: number;
     longitude: number;
@@ -96,7 +100,7 @@ export default function Page() {
                 ! 👋
               </Text>
               <TouchableOpacity
-                onpress={handleSignOut}
+                onPress={handleSignOut}
                 className="justify-center items-center w-10 h-10 rounded-full bg-white "
               >
                 <Image source={icons.out} className="w-4 h-4" alt="log out" />

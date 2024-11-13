@@ -1,9 +1,21 @@
 import { View, Text, Image } from "react-native";
 import CustomButton from "@/components/CustomButton";
 import { icons } from "@/constants";
+import { useOAuth } from "@clerk/clerk-expo";
+import { useCallback } from "react";
+import { googleOAuth } from "@/lib/auth";
 
 const OAuth = () => {
-  const handleGoogleSignIn = async () => {};
+  const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
+
+  const handleGoogleSignIn = useCallback(async () => {
+    try {
+      const result = await googleOAuth(startOAuthFlow);
+    } catch (err) {
+      console.error("OAuth error", err);
+    }
+  }, []);
+
   return (
     <View>
       <View className="flex flex-row justify-center items-center mt-4 gap-x-3">
