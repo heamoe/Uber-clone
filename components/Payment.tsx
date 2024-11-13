@@ -103,7 +103,7 @@ const Payment = ({
       returnURL: "myapp://book-ride",
     });
     if (error) {
-      console.log("Error initializing payment sheet", error);
+      console.log("Error initializing payment sheet:", error);
     }
   };
 
